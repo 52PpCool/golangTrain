@@ -7,14 +7,16 @@ import (
 
 func main() {
 	/*
-		select{
-		case expression1:
-			code
-		case expression2:
-			code
-		default:
-			code
-		}
+			select{
+			case expression1:
+				code
+			case expression2:
+				code
+			default:
+				code
+			}
+
+		select 没有顺序
 	*/
 	SelectDemo01()
 
@@ -25,7 +27,7 @@ func main() {
 	go task1(ch1)
 	go task2(ch2)
 	go task3(ch3)
-	
+
 	select {
 	case message1 := <-ch1:
 		fmt.Println("ch1", message1)
@@ -40,34 +42,33 @@ func main() {
 	// 死锁情况
 	Deadlock()
 	EmptySelect()
-	
+
 	// Timeout
 	Timeout()
-	
+
 	selectDemo02()
 }
 
 func selectDemo02() {
-	c1:=make(chan string,2)
-	c1<-"学习go"
+	c1 := make(chan string, 2)
+	c1 <- "学习go"
 	select {
 	case c1 <- "学习java":
-		fmt.Println("c1 Receive",<-c1)
-		fmt.Println("c1 Receive",<-c1)
+		fmt.Println("c1 Receive", <-c1)
+		fmt.Println("c1 Receive", <-c1)
 	default:
 		fmt.Println("channel blocking")
 	}
 }
 
 func Timeout() {
-	ch1:=make(chan string,1)
-	ch2:=make(chan string,1)
-	ch3:=make(chan string,1)
-	timeout:=make(chan bool,1)
-	
-	// 超时
-	go makeTimeout(timeout,2)
+	ch1 := make(chan string, 1)
+	ch2 := make(chan string, 1)
+	ch3 := make(chan string, 1)
+	timeout := make(chan bool, 1)
 
+	// 超时
+	go makeTimeout(timeout, 2)
 
 	select {
 	case message1 := <-ch1:
@@ -82,8 +83,8 @@ func Timeout() {
 }
 
 func makeTimeout(timeout chan bool, i int) {
-	time.Sleep(time.Second*time.Duration(i))
-	timeout<-true
+	time.Sleep(time.Second * time.Duration(i))
+	timeout <- true
 }
 
 func EmptySelect() {
