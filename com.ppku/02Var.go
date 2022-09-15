@@ -38,4 +38,13 @@ func main() {
 	fmt.Println("BEIJING=", BEIJING)
 	fmt.Println("SHANGHAI=", SHANGHAI)
 	fmt.Println("SHENZHEN=", SHENZHEN)
+
+	// 动态类型 程序运行时系统才能看见的类型
+	var number int = 100
+	fmt.Println(number)
+	number1 := int(100)
+	fmt.Printf("number1 Type:%T,data: %v \n", number1, number1)
+	number2 := (interface{})(100)
+	fmt.Printf("number2 Type:%T,data: %v \n", number2, number2)
+
 }
