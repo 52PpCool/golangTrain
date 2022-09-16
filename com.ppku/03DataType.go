@@ -203,8 +203,6 @@ func main() {
 		strings.LastIndex()：反向搜索⼦字符串
 	*/
 	tracer := "张三来了,张三bye bye"
-
-	//正向
 	com := strings.Index(tracer, ",")
 	fmt.Println(",位置：", com)
 	fmt.Println(tracer[com+1:]) //  张三bye bye
@@ -218,7 +216,38 @@ func main() {
 	fmt.Println(com, pos, tracer[5+pos])
 
 	/*
-		类型转换
+				类型转换
+			Go语言不存在隐式类型转换，因此所有的类型转换都必须显式的声明
+		类型 B 的值 = 类型 B(类型 A 的值)
 	*/
-	
+
+	// 初始化一个int32整数
+	var a1 int32 = math.MaxInt32 // 1047483647
+
+	// 输出变量的16进制 和10进制的值
+	fmt.Printf("int32: 0x%x,%d \n", a1, a1)
+
+	// 将数值转换为16进制,发生数值截断
+	a2 := int16(a1)
+	fmt.Printf("int16:0x%x,%d \n", a2, a2)
+
+	// 将常量保存为float32
+	var s = 44.155
+	fmt.Println(int(s))
+
+	/*
+			修改字符串
+
+		[]byte string 可以强制类型转换
+	*/
+	s1 := "localhost:8080"
+	strByte := []byte(s1)
+
+	// 下标修改
+	strByte[len(s1)-1] = '1'
+	fmt.Println(strByte)
+
+	// 强制类型转换
+	s2 := string(strByte)
+	fmt.Println(s2)
 }
