@@ -25,7 +25,7 @@ func main() {
 	var cc = "Hello World!"
 	fmt.Printf("cc=%s,cc的类型是:%T \n", cc, cc)
 
-	// 方法4 短声明 :=
+	// 方法4 短声明 :=  只能⽤在函数内部 局部变量
 
 	e := 100
 	fmt.Printf("e=%d,e的类型为：%T \n", e, e)
@@ -38,6 +38,13 @@ func main() {
 	fmt.Println("BEIJING=", BEIJING)
 	fmt.Println("SHANGHAI=", SHANGHAI)
 	fmt.Println("SHENZHEN=", SHENZHEN)
+
+	// 批量声明
+	//var(
+	//	names string
+	//	ages int64
+	//	length float64
+	//)
 
 	// 动态类型 程序运行时系统才能看见的类型
 	var number int = 100
