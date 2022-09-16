@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"math"
+	"strconv"
 	"strings"
 	"unicode/utf8"
 	"unsafe"
@@ -44,17 +45,17 @@ func main() {
 	fmt.Println("=======================================")
 
 	// 无符号位整型
-	var unum8 uint8 = 128
-	var unum16 uint16 = 32768
-	var unum32 uint32 = math.MaxUint32
-	var unum64 uint64 = math.MaxUint64
-	var unum uint = math.MaxUint
+	var uNumber8 uint8 = 128
+	var uNumber16 uint16 = 32768
+	var uNumber32 uint32 = math.MaxUint32
+	var uNumber64 uint64 = math.MaxUint64
+	var uNumber uint = math.MaxUint
 
-	fmt.Printf("unum8的类型是 %T,大小是:%d,数值是：%d \n", unum8, unsafe.Sizeof(unum8), unum8)
-	fmt.Printf("unum16的类型是 %T,大小是:%d,数值是：%d \n", unum16, unsafe.Sizeof(unum16), unum16)
-	fmt.Printf("unum32的类型是 %T,大小是:%d,数值是：%d \n", unum32, unsafe.Sizeof(unum32), unum32)
-	fmt.Printf("unum64的类型是 %T,大小是:%d,数值是：%d \n", unum64, unsafe.Sizeof(unum64), unum64)
-	fmt.Printf("unum的类型是 %T,大小是:%d,数值是：%d \n", unum, unsafe.Sizeof(unum), unum)
+	fmt.Printf("unum8的类型是 %T,大小是:%d,数值是：%d \n", uNumber8, unsafe.Sizeof(uNumber8), uNumber8)
+	fmt.Printf("unum16的类型是 %T,大小是:%d,数值是：%d \n", uNumber16, unsafe.Sizeof(uNumber16), uNumber16)
+	fmt.Printf("unum32的类型是 %T,大小是:%d,数值是：%d \n", uNumber32, unsafe.Sizeof(uNumber32), uNumber32)
+	fmt.Printf("unum64的类型是 %T,大小是:%d,数值是：%d \n", uNumber64, unsafe.Sizeof(uNumber64), uNumber64)
+	fmt.Printf("unum的类型是 %T,大小是:%d,数值是：%d \n", uNumber, unsafe.Sizeof(uNumber), uNumber)
 	fmt.Println("=======================================")
 
 	// 浮点型
@@ -88,8 +89,8 @@ func main() {
 	b := false
 	fmt.Println("a=", a)
 	fmt.Println("b=", b)
-	fmt.Println(a || b)
-	fmt.Println(a && b)
+	fmt.Println(a || b) // 短路或
+	fmt.Println(a && b) // 短路与
 	fmt.Println("=======================================")
 
 	// 复数构建 complex
@@ -250,4 +251,33 @@ func main() {
 	// 强制类型转换
 	s2 := string(strByte)
 	fmt.Println(s2)
+
+	// 字符串和其他类型转换
+	newStr := "1"
+	intValue, _ := strconv.Atoi(newStr)
+	fmt.Printf("%T,%d \n", intValue, intValue) // int,1
+
+	//int 转 str
+	intValues := 1
+	strValue := strconv.Itoa(intValues)
+	fmt.Printf("%T,%s", strValue, strValue)
+
+	/*
+		浮点数与字符串
+		4个参数，，1：要转换的浮点数 2. 格式标记（b、e、E、f、g、G) 3. 精度 4. 指定浮点类型（32:float32、64:float64）
+		 格式标记：
+		 ‘b’ (-ddddp±ddd，⼆进制指数)
+		 ‘e’ (-d.dddde±dd，⼗进制指数)
+		 ‘E’ (-d.ddddE±dd，⼗进制指数)
+		 ‘f’ (-ddd.dddd，没有指数)
+		 ‘g’ (‘e’:⼤指数，‘f’:其它情况)
+		 ‘G’ (‘E’:⼤指数，‘f’:其它情况)
+
+		 如果格式标记为 ‘e’，‘E’和’f’，则 prec 表示⼩数点后的数字位数
+		 如果格式标记为 ‘g’，‘G’，则 prec 表示总的数字位数（整数部分+⼩数部分）
+	*/
+
+	string1 := "4.554185"
+	f1, _ := strconv.ParseFloat(string1, 32)
+	fmt.Printf("%T,%f", f1, f1)
 }
