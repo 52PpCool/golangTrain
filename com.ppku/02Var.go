@@ -2,13 +2,21 @@ package main
 
 import "fmt"
 
-const (
-	BEIJING = 10 * iota //iota常量计数器
+const ( // 常量：不会改变的数据，只能是 bool,整型，字符串型，常量在编译器就确定了
+	BEIJING = iota //iota常量计数器,用于⽣成⼀组以相似规则初始化的常量，默认值为0，每一行加1
 	SHANGHAI
 	SHENZHEN
 )
+const (
+	a = 1
+	b
+	c = 2
+	d
+)
 
 func main() {
+	// 批量声明的常量除了第一个外其他的初始表达式可以省略
+	fmt.Println(a, b, c, d) // "1 1 2 2"
 	// var 关键字
 	// 方法1 声明一个变量 默认值为0
 	var a int
@@ -54,4 +62,12 @@ func main() {
 	number2 := (interface{})(100)
 	fmt.Printf("number2 Type:%T,data: %v \n", number2, number2)
 
+	// 类型别名  别名类型只会在代码中存在，编译完成时，不会有别名类型了
+	fmt.Println("============类型别名===============")
+	type newInt int
+	type AliasInt int
+	var a1 newInt
+	fmt.Printf("type：%T \n", a1)
+	var a2 AliasInt
+	fmt.Printf("Type:%T \n", a2)
 }
