@@ -51,6 +51,14 @@ func advanceBrand() {
 	}
 }
 
+// 特殊写法
+func specialBrand() {
+	if a := 10; a > 5 {
+		fmt.Println(a)
+		return
+	}
+}
+
 func choose() {
 
 	/*
@@ -118,6 +126,15 @@ func advanceChoose() {
 	}
 }
 
+/*
+	for range
+
+for key, value := range coll  value始终为集合的值拷贝,只读
+可以遍历数组，切片，字符串，map及管道
+数组、切⽚、字符串返回索引和值。
+map 返回键和值。
+channel只返回管道内的值
+*/
 func forResult(args ...int) bool {
 	for _, v := range args {
 		if v > 10 {
@@ -209,6 +226,35 @@ func singleLoop() {
 	}
 }
 
+// 单for循环
+func forTest() {
+	sum := 0
+	for {
+		sum++
+		if sum > 100 {
+			//break是跳出循环
+			break
+		}
+	}
+}
+
+func advance() {
+	step := 2
+	//初值可以省略，但是;必须有，但是这样写step的作⽤域就⽐较⼤了，脱离了for循环
+	for ; step > 0; step-- {
+		fmt.Println(step)
+	}
+}
+
+// 简化
+func simple() {
+	step := 2
+	for step > 0 {
+		step--
+		fmt.Println(step)
+	}
+}
+
 // 关键字 defer 用于注册延迟调用。
 // 这些调用直到 return 前才被执。因此，可以用来做资源清理。 类似于java finally
 var s = "学习go"
@@ -289,6 +335,46 @@ func download(url string) {
 	time.Sleep(time.Duration(n) * time.Second)
 }
 
+func length(s string) int {
+	println("call length.")
+	return len(s)
+}
+
+/*
+return 结束整个方法
+break  结束 for、switch 和 select 的代码块  后⾯添加 标签 ，表示退出某个标签对应的代码块
+continue 结束当前循环，开始下⼀次的循环迭代过程。仅限在 for 循环内使⽤，在后添加标签时，表示开始标签对应的循环
+标签 要求必须定义
+在对应的 for 、 switch 和 select 的代码块上
+*/
+func breakTest() {
+OuterLoop:
+	for a := 0; a < 20; a++ {
+		for i := 0; i < 5; i++ {
+			switch i {
+			case 2:
+				fmt.Println(a, i)
+				break OuterLoop // 表示结束整个标签代码
+			}
+			fmt.Println(a, i)
+		}
+	}
+}
+
+func continueTest() {
+OuterLoop:
+	for a := 0; a < 20; a++ {
+		for i := 0; i < 5; i++ {
+			switch i {
+			case 2:
+				fmt.Println(a, i)
+				continue OuterLoop // 表示开始 标签对应的循环
+			}
+			fmt.Println(a, i)
+		}
+	}
+}
+
 func main() {
 	//url := "http://www.go-edu.cn/"
 	//for {
@@ -302,4 +388,10 @@ func main() {
 	fmt.Println("学java")
 label:
 	fmt.Println("《学习使我快乐》")
+
+	s := "abcd"
+	// 这样写会多次调佣length函数
+	for i := 0; i < length(s); i++ { // for i,n:= 0,length(s); i <n; i++
+		println(i, s[i])
+	}
 }
