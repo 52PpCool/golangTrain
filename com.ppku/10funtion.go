@@ -7,17 +7,20 @@ import (
 
 func main() {
 	/*
-			函数可见性：
-			首字母大写 public
-			首字母小写 private
+				函数可见性：
+				首字母大写 public
+				首字母小写 private
 
-		func name(parameterList) (resultList){
-		        // 函数体
-		}
+			func name(parameterList) (resultList){
+			        // 函数体
+			}
 
-		func (parameterList) (resultList){
-			// 函数体
-		}
+			func (parameterList) (resultList){
+				// 函数体
+			}
+
+		Go 语⾔使⽤的是值传递，即在调⽤过程中不会影响到实际参数
+		map、slice、chan、指针、interface默认以引⽤的⽅式传递
 	*/
 	fmt.Println("56+1=", sum(56, 1))
 	printBook()
